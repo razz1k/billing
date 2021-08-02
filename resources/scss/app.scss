@@ -1,0 +1,28 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+.post {
+    &__place-holder {
+        margin: auto;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        height: 50px;
+    }
+}
+
+.form {
+    &__input-icon {
+        &--small {
+            height: 15px;
+        }
+    }
+}
