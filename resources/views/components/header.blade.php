@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <ul class="nav justify-content-md-end">
                 <li class="nav-item">
@@ -49,7 +49,7 @@
                         </li>
                     @endif
                 @else
-                    @if ( null !== Auth::user() and (Auth::user()->is_admin or Auth::user()->id == 2) and (Request::is('(text|video|category)]/*') and !Request::is('(text|video|category)]/*/edit')))
+                    @if ( null !== Auth::user() and (Auth::user()->id == 2) and (Request::is('(text|video|category)]/*') and !Request::is('(text|video|category)]/*/edit')))
                         <li class="nav-item">
                             <a href="#" class="nav-link">Edit
                                 @switch(Request::path())
@@ -65,13 +65,18 @@
                                 @endswitch</a>
                         </li>
                     @endif
+                    <li class="nav-item color-mode__nav-element">
+                        <button class="btn btn-secondary color-mode__button" type="button" data-current-theme="light">
+                            <i class="color-mode__icon bi bi-x-diamond-fill text-dark"></i>
+                        </button>
+                    </li>
                     <li class="nav-item">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownProfileMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->first_name }}
                             </button>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropDownUsersButton">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenuButton">
                                 <li><a href="{{route('profile.show')}}" class="dropdown-item">Profile</a></li>
 
                                 <li><a class="dropdown-item bg-danger" href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -7,6 +7,26 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.bg-AquaIsland {
+    background-color: var(--BrightGray);
+}
+
+.color-mode {
+    &__nav-element {
+        //
+    }
+
+    &__button {
+        //
+    }
+
+    &__icon {
+        //
+    }
+}
+
 .post {
     &__place-holder {
         margin: auto;
