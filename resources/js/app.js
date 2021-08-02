@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (cookie == null) {
         document.cookie = 'theme=' + (currentTheme() == 'light' ? 'light' : 'dark') +
             '; Expires=' + endDate + ';'
-        console.log('Cookies are now: ' + document.cookie);
     }
     if (cookieTheme() !== currentTheme()) {
         setColorMode();
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.cookie = 'theme=' + (cookieTheme() == 'light' ? 'dark' : 'light') +
             '; Expires=' + endDate + ';'
-        console.log('Cookies are now: ' + cookieTheme());
 
         setColorMode();
     });
