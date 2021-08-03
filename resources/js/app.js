@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setColorMode() {
-        body.classList.toggle('bg-AquaIsland');
+        body.classList.toggle('dark-theme');
         nav.classList.toggle('navbar-light');
         nav.classList.toggle('navbar-dark');
         colorModeIcon.classList.toggle('text-dark');

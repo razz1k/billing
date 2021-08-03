@@ -1391,13 +1391,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
 .bi-safe::before { content: "\f65a"; }
 
 @charset "UTF-8";
-:root {
-  --AquaIsland: #AECDE0;
-  --PigeonPost: #A1B2D7;
-  --BrightGray: #3B3E51;
-  --bs-white: #aaaaaa;
-}
-
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -12283,7 +12276,20 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.bg-AquaIsland {
+:root {
+  --AquaIsland: #AECDE0;
+  --PigeonPost: #A1B2D7;
+  --BrightGray: #3B3E51;
+}
+
+.dark-theme {
+  background-color: var(--BrightGray);
+  color: var(--bs-white);
+}
+.dark-theme * > .card {
+  background-color: var(--BrightGray);
+}
+.dark-theme * > .modal-content {
   background-color: var(--BrightGray);
 }
 

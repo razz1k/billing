@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,10 +34,10 @@ class CategoryController extends Controller
     /**
      * Create a new category instance.
      *
-     * @param array $data
-     * @return \Illuminate\Http\RedirectResponse
+     * @param array|null $data
+     * @return RedirectResponse
      */
-    public function create(array $data = null) {
+    public function create(array $data = null): RedirectResponse {
         $data = $data ?? Request::capture()->all();
         Category::create([
             'name' => $data['name'],
@@ -51,10 +52,11 @@ class CategoryController extends Controller
     /**
      * Update category instance.
      *
-     * @param array $data
-     * @return \Illuminate\Http\RedirectResponse
+     * @param int $id
+     * @param array|null $data
+     * @return RedirectResponse
      */
-    public function update(int $id, array $data = null) {
+    public function update(int $id, array $data = null): RedirectResponse {
         $data = $data ?? Request::capture()->all();
 
         /** @var Category $category */
@@ -75,7 +77,7 @@ class CategoryController extends Controller
         return view($this->viewEditor, ['data' => $data, 'type' => 'category', 'id' => $id]);
     }
 
-    public function delete(int $id) {
+    public function delete(int $id): RedirectResponse {
         Category::destroy($id);
         return redirect()->route('editor', ['type' => 'category']);
     }

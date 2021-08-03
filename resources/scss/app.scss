@@ -1,16 +1,25 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
-// Variables
-@import "variables";
-
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// Variables
+@import "variables";
+
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-.bg-AquaIsland {
+.dark-theme {
     background-color: var(--BrightGray);
+    color: var(--bs-white);
+
+    * > .card {
+        background-color: var(--BrightGray);
+    }
+
+    * > .modal-content {
+        background-color: var(--BrightGray);
+    }
 }
 
 .color-mode {
