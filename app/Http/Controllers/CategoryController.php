@@ -91,6 +91,6 @@ class CategoryController extends Controller
             $data = Category::all();
         }
 
-        return view($layout, ['data' => $data]);
+        return view($layout, ['data' => $data, 'type' => 'category']);
     }
 }

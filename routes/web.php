@@ -38,11 +38,11 @@ Route::put('/profile/update', [UserController::class, 'edit'])->name('profile.up
 Route::get('/category/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('category.show');
 Route::get('/category/list', [CategoryController::class, 'show'])->name('category.list');
 
-Route::get('/text/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('text.show');
-Route::get('/text/list', [CategoryController::class, 'show'])->name('text.list');
+Route::get('/text/{id}', [TextPostController::class, 'show'])->where('id', '[0-9]+')->name('text.post.show');
+Route::get('/text/list', [TextPostController::class, 'show'])->name('text.post.list');
 
-Route::get('/video/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('video.show');
-Route::get('/video/list', [CategoryController::class, 'show'])->name('video.list');
+Route::get('/video/{id}', [VideoPostController::class, 'show'])->where('id', '[0-9]+')->name('video.post.show');
+Route::get('/video/list', [VideoPostController::class, 'show'])->name('video.post.list');
 
 Route::any('/{type}/{id?}/{edit?}', function (Request $request, $type, $id = null) {
     switch ($type) {

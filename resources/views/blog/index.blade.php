@@ -8,11 +8,11 @@
             </div>
 
             <div class="col-6 d-grid gy-3">
-                <a href="#" class="btn btn-primary"><span class="text-dark">Text</span>Posts</a>
+                <a href="{{route('text.post.list')}}" class="btn btn-primary"><span class="text-dark">Text</span>Posts</a>
             </div>
 
             <div class="col-6 d-grid gy-3">
-                <a href="#" class="btn btn-primary"><span class="text-dark">Video</span>Posts</a>
+                <a href="{{route('video.post.list')}}" class="btn btn-primary"><span class="text-dark">Video</span>Posts</a>
             </div>
         </div>
     </div>
