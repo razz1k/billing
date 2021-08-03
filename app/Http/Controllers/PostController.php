@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,7 @@ abstract class PostController extends Controller
         return redirect()->route('editor', [
             'type' => $this->blogType,
             'id' => $this->model::all()->last()->id,
+            'id' => Post::all()->last()->id,
             'edit' => 'edit'
         ]);
     }
@@ -68,12 +70,12 @@ abstract class PostController extends Controller
     public function update(int $id, array $data = null): RedirectResponse {
         $data = $data ?? Request::capture()->all();
 
-        /** @var Category $category */
-        $category = $this->model::findOrFail($id);
-        $category->fill($data);
-        $category->save();
+        /** @var Post $post */
+        $post = $this->model::findOrFail($id);
+        $post->fill($data);
+        $post->save();
 
-        return redirect()->route('editor', ['type' => $this->blogType, 'id' => $category->id, 'edit' => 'edit']);
+        return redirect()->route('editor', ['type' => $this->blogType, 'id' => $post->id, 'edit' => 'edit']);
     }
 
     public function edit($id = null) {

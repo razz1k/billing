@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form method="POST" action="{{route('editor', ['type' => $type, 'id' => (isset($item)) ?? $item->id])}}">
+                <form method="POST" action="{{route('editor', ['type' => $type, 'id' => $item->id ?? null, 'edit' => $item ? 'edit' : ''])}}">
 
                     @if($isCollection)
                         @method('POST')
@@ -28,11 +28,15 @@
                             or select another &nbsp
                         </button>
                         <ul class="dropdown-menu">
-                            @foreach($data as $element)
+                            @forelse($data as $element)
                                 <li>
                                     <a class="dropdown-item" href="{{route('editor', ['type' => $type, 'id' => $element->id, 'edit' => 'edit'])}}">{{ $element->name ?? $element->metaTitle ?? $element->id  }}</a>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li>
+                                    <span class="dropdown-item">no elements exists now</span>
+                                </li>
+                            @endforelse
                         </ul>
                     </div>
                     @switch($type)
