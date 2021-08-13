@@ -19,16 +19,7 @@
                         @endif
                         @php $index++ @endphp
                         <div class="col-3 pb-3">
-                            <a class="text-decoration-none text-light" href="{{ route('video.post.single', [$item->id]) }}">
-                                <div class="card bg-secondary">
-                                    <div class="card-header text-center">
-                                        {{ ($type == 'category')? $type : $type . ' post' . ' id ' . $item->id }}
-                                    </div>
-                                    <div class="card-body text-center">
-                                        {{ $item->metaTitle }}
-                                    </div>
-                                </div>
-                            </a>
+                            @include('components.postCard')
                         </div>
                         @if(($index % 4) == 0)
                     </div>

@@ -13,26 +13,17 @@
     background-color: var(--BrightGray);
     color: var(--bs-white);
 
-    * > .card {
+    .card {
         background-color: var(--BrightGray);
+        border: 1px solid rgba(110, 170, 120, 0.25);
+
+        .card-header {
+            border-bottom: 1px solid rgba(110, 170, 120, 0.25);
+        }
     }
 
-    * > .modal-content {
+    .modal-content {
         background-color: var(--BrightGray);
-    }
-}
-
-.color-mode {
-    &__nav-element {
-        //
-    }
-
-    &__button {
-        //
-    }
-
-    &__icon {
-        //
     }
 }
 

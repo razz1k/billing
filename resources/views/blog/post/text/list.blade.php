@@ -14,23 +14,14 @@
         @else
             @php $index = 0 @endphp
             @foreach($data as $item)
-                @php $isNewRow = (($index % 4) == 0); $index++ @endphp
-                @if($isNewRow)
+                @if(($index % 4) == 0)
                     <div class="row justify-content-center">
                         @endif
-                        <div class="col-3">
-                            <a class="text-decoration-none text-light" href="{{ route('text.post.single', [$item->id]) }}">
-                                <div class="card bg-secondary">
-                                    <div class="card-header text-center">
-                                        {{ ($type == 'category')? $type : $type . ' post' . ' id ' . $item->id }}
-                                    </div>
-                                    <div class="card-body text-center">
-                                        {{  $item->metaTitle }}
-                                    </div>
-                                </div>
-                            </a>
+                        @php $index++ @endphp
+                        <div class="col-3 pb-3">
+                            @include('components.postCard')
                         </div>
-                        @if($isNewRow)
+                        @if(($index % 4) == 0)
                     </div>
                 @endif
             @endforeach
