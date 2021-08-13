@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 abstract class PostController extends Controller
 {
@@ -42,33 +43,29 @@ abstract class PostController extends Controller
         return $arr;
     }
 
-    /**
-     * Create a new TextPost instance.
-     *
-     * @param array|null $data
-     * @return RedirectResponse
-     */
-    public function create(array $data = null): RedirectResponse {
-        $data = $data ?? Request::capture()->all();
-        $this->model::create($this->fillFromData($data));
+
+    public function create(Request $request, int $id = null): RedirectResponse {
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+        ]);
+        $this->model::create($this->fillFromData($request->capture()->all()));
 
         return redirect()->route('editor', [
             'type' => $this->blogType,
             'id' => $this->model::all()->last()->id,
-            'id' => Post::all()->last()->id,
             'edit' => 'edit'
         ]);
     }
 
     /**
-     * Update TextPost instance.
+     * Update Post instance.
      *
+     * @param Request $request
      * @param int $id
-     * @param array|null $data
      * @return RedirectResponse
      */
-    public function update(int $id, array $data = null): RedirectResponse {
-        $data = $data ?? Request::capture()->all();
+    public function update(Request $request, int $id): RedirectResponse {
+        $data = $request->capture()->all();
 
         /** @var Post $post */
         $post = $this->model::findOrFail($id);
@@ -78,7 +75,7 @@ abstract class PostController extends Controller
         return redirect()->route('editor', ['type' => $this->blogType, 'id' => $post->id, 'edit' => 'edit']);
     }
 
-    public function edit($id = null) {
+    public function edit(Request $request, int $id = null) {
         if (isset($id)) {
             $data = $this->model::findOrFail($id);
         } else {
@@ -88,12 +85,12 @@ abstract class PostController extends Controller
         return view($this->viewEditor, ['data' => $data, 'type' => $this->blogType, 'id' => $id]);
     }
 
-    public function delete(int $id): RedirectResponse {
+    public function delete(Request $request, int $id): RedirectResponse {
         $this->model::destroy($id);
         return redirect()->route('editor', ['type' => $this->blogType]);
     }
 
-    public function show($id = null) {
+    public function show(Request $request, int $id = null) {
 
         if (isset($id)) {
             $layout = $this->viewSingle;

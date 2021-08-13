@@ -14,7 +14,7 @@ abstract class Post extends Model
      *
      * @var array
      */
-    protected $fillable = [
+    public $fillable = [
         'author_id',
         'category_id',
         'metaTitle',
@@ -32,4 +32,10 @@ abstract class Post extends Model
      * @var string
      */
     protected $table = 'posts';
+
+    public function __construct(array $attributes = []) {
+        $this->fillable = array_merge($this->fillable, $this->additionalParams);
+
+        parent::__construct($attributes);
+    }
 }

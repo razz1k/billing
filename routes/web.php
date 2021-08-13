@@ -71,5 +71,5 @@ Route::any('/{type}/{id?}/{edit?}', function (Request $request, $type, $id = nul
         default:
             $metod = 'edit';
     }
-    return (new $controller)->$metod($id);
+    return (new $controller)->$metod($request, $id);
 })->where('edit', '^edit$')->name('editor')->middleware('auth');

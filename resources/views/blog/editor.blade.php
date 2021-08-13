@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form method="POST" action="{{route('editor', ['type' => $type, 'id' => $item->id ?? null, 'edit' => $item ? 'edit' : ''])}}">
+                <form class="needs-validation" method="POST" action="{{route('editor', ['type' => $type, 'id' => $item->id ?? null, 'edit' => $item ? 'edit' : ''])}}">
 
                     @if($isCollection)
                         @method('POST')

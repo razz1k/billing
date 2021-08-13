@@ -48,7 +48,12 @@
     <span class="input-group-text" id="input-group-text__title">
         title
     </span>
-    <input name="title" type="text" class="form-control" placeholder="{{ $item->title ?? 'title' }}" value="{{ $item->title ?? '' }}" aria-describedby="input-group-text__title">
+    <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="{{ $item->title ?? 'title' }}" value="{{ $item->title ?? '' }}" aria-describedby="input-group-text__title">
+    @error('title')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
 </div>
 
 <div class="input-group my-3">

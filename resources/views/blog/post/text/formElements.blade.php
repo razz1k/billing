@@ -48,7 +48,12 @@
     <span class="input-group-text" id="input-group-text__title">
         title
     </span>
-    <input name="title" type="text" class="form-control" placeholder="{{ (isset($item->title)) ? $item->title : 'title' }}" value="{{ $item->title ?? '' }}" aria-describedby="input-group-text__title">
+    <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="{{ (isset($item->title)) ? $item->title : 'title' }}" value="{{ $item->title ?? '' }}" aria-describedby="input-group-text__title">
+    @error('title')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
 </div>
 
 <div class="input-group my-3">
@@ -69,5 +74,5 @@
     <span class="form-label text-light" for="input-group-text__content">
         content
     </span>
-    <input name="content" type="text" class="form-control" id="input-group-text__content" placeholder="{{ (isset($item->content)) ? $item->content : 'content' }}" value="{{ $item->content ?? '' }}">
+    <input name="content" type="text" class="form-control" id="input-group-text__content" placeholder="{{ $item->content ?? 'content' }}" value="{{ $item->content ?? '' }}">
 </div>
