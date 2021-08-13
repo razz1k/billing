@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use function GuzzleHttp\Promise\all;
 
 abstract class PostController extends Controller
 {
@@ -13,26 +12,58 @@ abstract class PostController extends Controller
      * @var string
      */
     public $viewDir = 'blog.post.';
+
+    /**
+     * @var string
+     */
     public $blogType;
+
+    /**
+     * @var string
+     */
     public $model;
+
     /**
      * @var string
      */
     public $viewSingle;
+
     /**
      * @var string
      */
     public $viewList;
+
     /**
      * @var string
      */
     public $viewEditor;
+
+    /**
+     * @var array
+     */
+    public $additionalValidationRules;
+
+    /**
+     * @var array
+     */
+    public $validationRules = [
+        'metaTitle' => ['required', 'string', 'max:250'],
+        'metaDescription' => ['required', 'string'],
+        'metaKeywords' => ['required', 'string'],
+        'preview' => ['required', 'string'],
+        'title' => ['required', 'string'],
+        'description' => ['required', 'string'],
+        'after' => ['required', 'string'],
+        'content' => ['required', 'string'],
+    ];
 
     public function __construct() {
         $this->viewSingle = $this->viewDir . $this->blogType . '.single';
         $this->viewList = $this->viewDir . $this->blogType . '.list';
         $this->viewEditor = 'blog.editor';
         $this->model = 'App\Models\\' . ucfirst($this->blogType) . 'Post';
+
+        $this->validationRules = array_merge($this->validationRules, $this->additionalValidationRules);
     }
 
     public function fillFromData($data): array {
@@ -45,9 +76,7 @@ abstract class PostController extends Controller
 
 
     public function create(Request $request, int $id = null): RedirectResponse {
-        $validated = $request->validate([
-            'title' => ['required', 'string'],
-        ]);
+        $request->validate($this->validationRules);
         $this->model::create($this->fillFromData($request->capture()->all()));
 
         return redirect()->route('editor', [

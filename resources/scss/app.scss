@@ -36,6 +36,10 @@
     }
 }
 
+footer {
+    z-index: 2000;
+}
+
 .post {
     &__place-holder {
         margin: auto;

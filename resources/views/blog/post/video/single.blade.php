@@ -12,7 +12,7 @@
                             Author: {{ \App\Models\User::get()->where('id', $data->author_id)->first()->first_name }}
                         </p>
                     </div>
-                    <iframe width="800" height="510" src="{{ 'https://www.youtube.com/embed/' . explode('=', $data->videoYoutube)[1] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="800" height="510" src="{{ 'https://www.youtube.com/embed/' . (explode('=', $data->videoYoutube)[1] ?? '') }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <p>{{ $data->after }}</p>
                 </article>
             </div>

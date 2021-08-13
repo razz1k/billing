@@ -12293,6 +12293,10 @@ textarea.form-control-lg {
   background-color: var(--BrightGray);
 }
 
+footer {
+  z-index: 2000;
+}
+
 .post__place-holder {
   margin: auto;
   display: flex;
