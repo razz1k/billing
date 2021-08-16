@@ -94,6 +94,7 @@ abstract class PostController extends Controller
      * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse {
+        $request->validate($this->validationRules);
         $data = $request->capture()->all();
 
         /** @var Post $post */

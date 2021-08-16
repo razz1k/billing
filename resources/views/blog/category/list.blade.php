@@ -24,7 +24,7 @@
                                         {{ ($type == 'category')? $type : $type . ' post' . ' id ' . $item->id }}
                                     </div>
                                     <div class="card-body text-center">
-                                        {{ $type . ' name ' . $item->name }}
+                                        {{ $item->name }}
                                     </div>
                                 </div>
                             </a>

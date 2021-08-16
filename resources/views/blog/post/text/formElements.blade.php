@@ -92,7 +92,10 @@
     <span class="mx-3 form-label" for="input-group-text__content">
         content
     </span>
-    <textarea name="content" id="input-group-text__content" class="form-control @error('content') is-invalid @enderror" form="editorMainForm" cols="30" rows="10" placeholder="{{ $item->content ?? 'content' }}" value="{{ $item->content ?? '' }}"></textarea>
+    <textarea name="content" id="input-group-text__content" class="form-control @error('content') is-invalid @enderror"
+              form="editorMainForm"
+              cols="30" rows="10"
+              placeholder="{{ $item->content ?? 'content' }}">{{ $item->content ?? '' }}</textarea>
     @error('content')
     <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
