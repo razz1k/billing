@@ -20,7 +20,12 @@
     <span class="input-group-text" id="input-group-text__metaTitle">
         metaTitle
     </span>
-    <input name="metaTitle" type="text" class="form-control @error('metaTitle') is-invalid @enderror" placeholder="{{ (isset($item->metaTitle)) ? $item->metaTitle : 'metaTitle' }}" value="{{ $item->metaTitle ?? '' }}" aria-describedby="input-group-text__metaTitle">
+    <input name="metaTitle"
+           type="text"
+           class="form-control @error('metaTitle') is-invalid @enderror"
+           placeholder="{{ (isset($item->metaTitle)) ? $item->metaTitle : 'metaTitle' }}"
+           value="{{ $item->metaTitle ?? '' }}"
+           aria-describedby="input-group-text__metaTitle">
     @error('metaTitle')
     <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

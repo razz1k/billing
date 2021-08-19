@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TextPostController;
-use App\Http\Controllers\VideoPostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -21,7 +19,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('blog.index');
+  return view('blog.index');
 });
 
 Auth::routes();
@@ -29,47 +27,28 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/admin', function () {
-    return view('blog.adminPanel');
+  return view('blog.adminPanel');
 })->name('admin.panel')->middleware('auth');
 
 Route::get('/profile/{user?}', [UserController::class, 'show'])->name('profile.show')->middleware('auth');
 Route::put('/profile/update', [UserController::class, 'edit'])->name('profile.update')->middleware('auth');
 
-Route::get('/category/{id}', [CategoryController::class, 'show'])->where('id', '[0-9]+')->name('category.single');
-Route::get('/category/list', [CategoryController::class, 'show'])->name('category.list');
+Route::prefix('category')->name('category')->group(function () {
+  Route::get('/', [CategoryController::class, 'listAction'])->name('.list');
+  Route::get('{id}', [CategoryController::class, 'singleAction'])->name('.single');
+});
 
-Route::get('/text/{id}', [TextPostController::class, 'show'])->where('id', '[0-9]+')->name('text.post.single');
-Route::get('/text/list', [TextPostController::class, 'show'])->name('text.post.list');
+Route::prefix('admin')->name('admin')->middleware('auth')->group(function () {
+  Route::get('/', function () {
+    return view('blog.adminPanel');
+  })->name('.panel');
 
-Route::get('/video/{id}', [VideoPostController::class, 'show'])->where('id', '[0-9]+')->name('video.post.single');
-Route::get('/video/list', [VideoPostController::class, 'show'])->name('video.post.list');
-
-Route::any('/{type}/{id?}/{edit?}', function (Request $request, $type, $id = null, $edit = null) {
-    switch ($type) {
-        case('category');
-            $controller = CategoryController::class;
-            break;
-        case('text');
-            $controller = TextPostController::class;
-            break;
-        case('video');
-            $controller = VideoPostController::class;
-            break;
-        default:
-            return abort(404);
-    }
-    switch ($request->method()) {
-        case('POST'):
-            $metod = 'create';
-            break;
-        case('PUT'):
-            $metod = 'update';
-            break;
-        case('DELETE'):
-            $metod = 'delete';
-            break;
-        default:
-            $metod = 'edit';
-    }
-    return (new $controller)->$metod($request, $id);
-})->where('edit', '^edit$')->name('editor')->middleware('auth');
+  Route::prefix('category')->name('.category')->group(function () {
+    Route::get('/', [CategoryController::class, 'listAction'])->name('.list');
+    Route::get('create', [CategoryController::class, 'createAction'])->name('.create');
+    Route::post('create', [CategoryController::class, 'storeAction'])->name('.store');
+    Route::get('{id}', [CategoryController::class, 'editAction'])->name('.edit');
+    Route::put('{id}', [CategoryController::class, 'updateAction'])->name('.update');
+    Route::delete('{id}', [CategoryController::class, 'deleteAction'])->name('.delete');
+  });
+});
