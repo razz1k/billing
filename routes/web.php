@@ -51,4 +51,15 @@ Route::prefix('admin')->name('admin')->middleware('auth')->group(function () {
     Route::put('{id}', [CategoryController::class, 'updateAction'])->name('.update');
     Route::delete('{id}', [CategoryController::class, 'deleteAction'])->name('.delete');
   });
+
+  Route::prefix('post')->name('.post')->group(function () {
+    Route::prefix('text')->name('.text')->group(function () {
+      Route::get('/', [CategoryController::class, 'listAction'])->name('.list');
+      Route::get('create', [CategoryController::class, 'createAction'])->name('.create');
+      Route::post('create', [CategoryController::class, 'storeAction'])->name('.store');
+      Route::get('{id}', [CategoryController::class, 'editAction'])->name('.edit');
+      Route::put('{id}', [CategoryController::class, 'updateAction'])->name('.update');
+      Route::delete('{id}', [CategoryController::class, 'deleteAction'])->name('.delete');
+    });
+  });
 });

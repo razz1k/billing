@@ -8,11 +8,13 @@
       </div>
 
       <div class="col-6 d-grid gy-3">
-        <a href="#" class="btn btn-primary">Edit <span class="text-dark">Text</span> Posts</a>
+        <a href="{{route('admin.post.text.list')}}" class="btn btn-primary">Edit <span class="text-dark">Text</span>
+          Posts</a>
       </div>
 
       <div class="col-6 d-grid gy-3">
-        <a href="#" class="btn btn-primary">Edit <span class="text-dark">Video</span> Posts</a>
+        <a href="#" class="btn btn-primary">Edit <span class="text-dark">Video</span>
+          Posts</a>
       </div>
     </div>
   </div>

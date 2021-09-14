@@ -5,6 +5,6 @@ namespace App\Http\Requests\Category;
 class UpdateRequest extends CreateRequest
 {
   /**
-   * нахуя меня создали
+   * пока что дополнить нечем
    */
 }

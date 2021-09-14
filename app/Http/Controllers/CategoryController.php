@@ -7,7 +7,6 @@ use App\Http\Requests\Category\UpdateRequest;
 use App\Http\UseCases\Category\Create as CreateProvider;
 use App\Http\UseCases\Category\Update as UpdateProvider;
 use App\Repositories\CategoryRepository;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -41,7 +40,6 @@ class CategoryController extends Controller
   }
 
   public function singleAction($id) {
-    dd(Request::capture());
     $category = $this->categoryRepository->getSingle($id);
 
     return view('blog.category.single', [
