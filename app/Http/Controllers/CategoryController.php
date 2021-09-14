@@ -63,7 +63,6 @@ class CategoryController extends Controller
     ]);
   }
 
-
   public function updateAction(UpdateRequest $request) {
     $this->updateProvider->update($request);
 
