@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Post\Video;
 
-use App\Http\Requests\Post\CreateRequest as PostRequest;
+use App\Http\Requests\Post\Request as PostRequest;
 
-class CreateRequest extends PostRequest
+class Request extends PostRequest
 {
   protected $additionalRules = [
     'videoYoutube' => ['required', 'url'],

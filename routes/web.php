@@ -39,6 +39,13 @@ Route::prefix('category')->name('category')->group(function () {
   Route::get('{id}', [CategoryController::class, 'singleAction'])->name('.single');
 });
 
+Route::prefix('post')->name('post')->group(function () {
+  Route::prefix('text')->name('.text')->group(function () {
+    Route::get('/', [TextController::class, 'listAction'])->name('.list');
+    Route::get('{id}', [TextController::class, 'singleAction'])->name('.single');
+  });
+});
+
 Route::prefix('admin')->name('admin')->middleware('auth')->group(function () {
   Route::get('/', function () {
     return view('blog.adminPanel');

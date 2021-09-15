@@ -39,7 +39,7 @@
                  type="text"
                  class="form-control @error('metaTitle') is-invalid @enderror"
                  placeholder="{{ (isset($post->metaTitle)) ? $post->metaTitle : 'metaTitle' }}"
-                 value="{{ $post->metaTitle ?? '' }}"
+                 value="{{ old('metaTitle') ?? '' }}"
                  aria-describedby="input-group-text__metaTitle">
           @error('metaTitle')
           <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                  type="text"
                  class="form-control @error('metaDescription') is-invalid @enderror"
                  placeholder="{{ (isset($post->metaDescription)) ? $post->metaDescription : 'metaDescription' }}"
-                 value="{{ $post->metaDescription ?? '' }}"
+                 value="{{ old('metaDescription') ?? '' }}"
                  aria-describedby="input-group-text__metaDescription">
           @error('metaDescription')
           <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                  type="text"
                  class="form-control @error('metaKeywords') is-invalid @enderror"
                  placeholder="{{ (isset($post->metaKeywords)) ? $post->metaKeywords : 'metaKeywords' }}"
-                 value="{{ $post->metaKeywords ?? '' }}"
+                 value="{{ old('metaKeywords') ?? '' }}"
                  aria-describedby="input-group-text__metaKeywords">
           @error('metaKeywords')
           <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
                  type="text"
                  class="form-control @error('preview') is-invalid @enderror"
                  placeholder="{{ (isset($post->preview)) ? $post->preview : 'preview' }}"
-                 value="{{ $post->preview ?? '' }}"
+                 value="{{ old('preview') ?? '' }}"
                  aria-describedby="input-group-text__preview">
           @error('preview')
           <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                  type="text"
                  class="form-control @error('title') is-invalid @enderror"
                  placeholder="{{ (isset($post->title)) ? $post->title : 'title' }}"
-                 value="{{ $post->title ?? '' }}"
+                 value="{{ old('title') ?? '' }}"
                  aria-describedby="input-group-text__title">
           @error('title')
           <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                  type="text"
                  class="form-control @error('description') is-invalid @enderror"
                  placeholder="{{ (isset($post->description)) ? $post->description : 'description' }}"
-                 value="{{ $post->description ?? '' }}"
+                 value="{{ old('description') ?? '' }}"
                  aria-describedby="input-group-text__description">
           @error('description')
           <span class="invalid-feedback" role="alert">
@@ -140,10 +140,9 @@
           <textarea name="content"
                     id="input-group-text__content"
                     class="form-control @error('content') is-invalid @enderror"
-
                     cols="30"
                     rows="10"
-                    placeholder="{{ $post->content ?? 'content' }}">{{ $post->content ?? '' }}</textarea>
+                    placeholder="{{ $post->content ?? 'content' }}">{{ old('content') ?? '' }}</textarea>
           @error('content')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -159,7 +158,7 @@
                  type="text"
                  class="form-control @error('after') is-invalid @enderror"
                  placeholder="{{ (isset($post->after)) ? $post->after : 'after' }}"
-                 value="{{ $post->after ?? '' }}"
+                 value="{{ old('after') ?? '' }}"
                  aria-describedby="input-group-text__after">
           @error('after')
           <span class="invalid-feedback" role="alert">

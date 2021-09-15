@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 abstract class PostController extends Controller
 {
@@ -20,12 +22,15 @@ abstract class PostController extends Controller
   public $createProvider;
   public $updateProvider;
   public $createRequest;
+  public $viewUpdate;
 
   public function __construct($postRepository, $createProvider, $updateProvider) {
-    $this->viewSingle = $this->viewDir . $this->viewType . $this->blogType . '.single';
+    $view = $this->viewDir . $this->viewType . $this->blogType;
+    $this->viewSingle = $view . '.single';
+    $this->viewUpdate = $view . '.update';
     $this->routeList = $this->viewType . $this->blogType . '.list';
-    $this->viewList = $this->viewDir . $this->routeList;
-    $this->viewCreate = $this->viewDir . $this->viewType . $this->blogType . '.create';
+    $this->viewList = $view . '.list';
+    $this->viewCreate = $view . '.create';
     $this->model = 'App\Models\\' . ucfirst($this->blogType) . 'Post';
 
     $this->postRepository = $postRepository;
@@ -40,17 +45,34 @@ abstract class PostController extends Controller
     ]);
   }
 
+  //storeAction implement in child class
+
   public function editAction($id) {
     return view('blog.post.text.update', [
       'post' => $this->postRepository->getSingle($id)
     ]);
   }
 
-  public function listAction() {
-    $posts = $this->postRepository->getAll();
-
-    return view($this->viewList, [
-      'posts' => $posts,
+  public function singleAction($id) {
+    $post = $this->postRepository->getSingle($id);
+    return view($this->viewSingle, [
+      'post' => $post,
+      'author' => User::get()->where('id', $post->author_id)->first()
     ]);
+  }
+
+  public function listAction() {
+    return view($this->viewList, [
+      'posts' => $this->postRepository->getAll(),
+      'isAdminPanel' => str_contains(Route::currentRouteName(), 'admin')
+    ]);
+  }
+
+  //storeAction implement in child class
+
+  public function deleteAction($id) {
+    $this->postRepository->delete($id);
+
+    return redirect(route('admin.category.list'));
   }
 }

@@ -9,8 +9,9 @@
       @csrf
       <div class="col-md-8">
         <div class="input-group has-validation mb-2">
-          <span class="input-group-text" id="input-group-text__name">Name Category</span>
-
+          <span class="input-group-text" id="input-group-text__name">
+            Name Category
+          </span>
           <input name="name"
                  type="text"
                  class="form-control @error('name')is-invalid @enderror"
@@ -24,23 +25,35 @@
           </div>
         </div>
 
-        <div class="btn-group d-flex float-end" role="group" aria-label="events for category">
+        <div class="btn-group d-flex float-end"
+             role="group"
+             aria-label="events for category">
           <button type="submit" class="btn btn-primary ml-auto">
             Save
           </button>
-          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeModal">
+          <button type="button"
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#removeModal">
             Delete
           </button>
         </div>
       </div>
     </form>
   </div>
-  <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal fade"
+       id="removeModal"
+       tabindex="-1"
+       aria-labelledby="deleteModalLabel"
+       aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="deleteModalLabel">Are you shure about this?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>You want delete <strong>{{ $category->name }}</strong> category</p>

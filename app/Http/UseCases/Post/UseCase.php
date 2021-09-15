@@ -2,14 +2,14 @@
 
 namespace App\Http\UseCases\Post;
 
-abstract class Create
+abstract class UseCase
 {
-  protected $PostRepository;
+  protected $postRepository;
   protected $model;
   protected $request;
 
   public function __construct($PostRepository, $model) {
-    $this->PostRepository = $PostRepository;
+    $this->postRepository = $PostRepository;
     $this->model = $model;
   }
 }

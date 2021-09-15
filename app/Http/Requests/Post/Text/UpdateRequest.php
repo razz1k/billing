@@ -4,7 +4,7 @@ namespace App\Http\Requests\Post\Text;
 
 use App\Http\Requests\Post\Request as PostRequest;
 
-class CreateRequest extends PostRequest
+class UpdateRequest extends PostRequest
 {
   public $additionalRules = [
     'content' => ['required', 'string', 'min:8'],

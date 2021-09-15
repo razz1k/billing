@@ -117,7 +117,6 @@
           <textarea name="content"
                     id="input-group-text__content"
                     class="form-control @error('content') is-invalid @enderror"
-                    form="editorMainForm"
                     cols="30"
                     rows="10"
                     placeholder="{{ $post->content ?? 'content' }}">{{ $post->content ?? '' }}</textarea>
@@ -145,9 +144,47 @@
           @enderror
         </div>
 
-
-        <button type="submit" class="btn btn-primary float-end">Create new</button>
+        <div class="btn-group d-flex float-end"
+             role="group"
+             aria-label="events for category">
+          <button type="submit" class="btn btn-primary float-end">
+            Save
+          </button>
+          <button type="button" class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#removeModal">
+            Delete
+          </button>
+        </div>
       </div>
     </form>
   </div>
+  <div class="modal fade" id="removeModal"
+       tabindex="-1"
+       aria-labelledby="deleteModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Are you shure about this?</h5>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>You want delete <strong>{{ $post->title }}</strong> post</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form method="POST" action="{{ route('admin.post.text.delete', ['id' => $post->id]) }}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn btn-danger">I'am shure, delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection

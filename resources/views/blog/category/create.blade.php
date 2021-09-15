@@ -13,6 +13,7 @@
                  id="name"
                  type="text"
                  class="form-control @error('name')is-invalid @enderror"
+                 value="{{ old('name') ?? '' }}"
                  aria-describedby="input-group-text__name input-group-text__name-error">
           <div class="invalid-feedback" id="input-group-text__name-error" role="alert">
             @error('name')

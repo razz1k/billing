@@ -2,14 +2,14 @@
 
 namespace App\Http\UseCases\Post\Text;
 
-use App\Repositories\Post\TextPostRepository;
+use App\Repositories\Post\Text\PostRepository;
 use App\Models\TextPost;
-use App\Http\UseCases\Post\Create as PostCreate;
+use App\Http\UseCases\Post\UseCase as PostUseCase;
 use App\Http\Requests\Post\Text\CreateRequest;
 
-class Create extends PostCreate
+class Create extends PostUseCase
 {
-  public function __construct(TextPostRepository $PostRepository, TextPost $model) {
+  public function __construct(PostRepository $PostRepository, TextPost $model) {
     parent::__construct($PostRepository, $model);
   }
 
@@ -20,6 +20,6 @@ class Create extends PostCreate
     }
 
     $post = new $this->model($data);
-    $this->PostRepository->store($post);
+    $this->postRepository->store($post);
   }
 }
