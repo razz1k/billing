@@ -12286,6 +12286,9 @@ textarea.form-control-lg {
   background-color: var(--BrightGray);
   color: var(--bs-white);
 }
+.dark-theme a {
+  color: var(--bs-white);
+}
 .dark-theme .card {
   background-color: var(--BrightGray);
   border: 1px solid rgba(110, 170, 120, 0.25);

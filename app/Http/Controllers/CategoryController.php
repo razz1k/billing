@@ -6,7 +6,9 @@ use App\Http\Requests\Category\CreateRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Http\UseCases\Category\Create as CreateProvider;
 use App\Http\UseCases\Category\Update as UpdateProvider;
+use App\Models\User;
 use App\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\Route;
 
 class CategoryController extends Controller
 {
@@ -31,22 +33,6 @@ class CategoryController extends Controller
     $this->updateProvider = $updateProvider;
   }
 
-  public function listAction() {
-    $categories = $this->categoryRepository->getAll();
-
-    return view('blog.category.list', [
-      'categories' => $categories
-    ]);
-  }
-
-  public function singleAction($id) {
-    $category = $this->categoryRepository->getSingle($id);
-
-    return view('blog.category.single', [
-      'category' => $category
-    ]);
-  }
-
   public function createAction() {
     return view('blog.category.create');
   }
@@ -57,12 +43,24 @@ class CategoryController extends Controller
     return redirect(route('admin.category.list'));
   }
 
+  public function singleAction($id) {
+    return view('blog.category.single', [
+      'category' => $this->categoryRepository->getSingle($id),
+    ]);
+  }
+
+  public function listAction() {
+    return view('blog.category.list', [
+      'categories' => $this->categoryRepository->getAll(),
+      'isAdminPanel' => str_contains(Route::currentRouteName(), 'admin')
+    ]);
+  }
+
   public function editAction($id) {
     return view('blog.category.update', [
       'category' => $this->categoryRepository->getSingle($id)
     ]);
   }
-
 
   public function updateAction(UpdateRequest $request) {
     $this->updateProvider->update($request);

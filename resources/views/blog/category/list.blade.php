@@ -2,21 +2,28 @@
 
 @section('content')
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-3 mb-2">
-        <a class="btn btn-primary btn-lg d-flex justify-content-center w-75 mx-auto" href="{{ route('admin.category.create') }}">
-          create
-          new
-          category
-        </a>
+    @if($isAdminPanel)
+      <div class="row justify-content-center">
+        <div class="col-3 mb-2">
+          <a class="btn btn-primary btn-lg d-flex justify-content-center w-75 mx-auto"
+             href="{{ route('admin.category.create') }}">
+            create new category
+          </a>
+        </div>
       </div>
-    </div>
-    @foreach($categories as $key => $category)
-      @if($key % 4 == 0)
+    @endif
+    @php
+      $counter = 0;
+    @endphp
+    @foreach($categories as $category)
+      @if($counter % 4 == 0)
         <div class="row justify-content-center">
           @endif
           <div class="col-md-3 mb-2">
-            <a class="text-decoration-none text-light" href="{{ route('admin.category.edit', ['id' => $category->id]) }}">
+            <a class="text-decoration-none"
+               href="{{ $isAdminPanel
+                        ? route('admin.category.edit', ['id' => $category->id])
+                        : route('category.single', ['id' => $category->id])}}">
               <div class="card">
                 <div class="card-header text-center">
                   {{ $category->id }}
@@ -27,9 +34,12 @@
               </div>
             </a>
           </div>
-          @if((($key + 1) % 4 == 0) or $key == (count($categories) - 1))
+          @if((($counter + 1) % 4 == 0) or $counter == (count($categories) - 1))
         </div>
       @endif
+      @php
+        $counter += 1;
+      @endphp
     @endforeach
   </div>
 @endsection

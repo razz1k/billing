@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Post\Text\Controller as TextController;
+use App\Http\Controllers\Post\Video\Controller as VideoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -38,6 +40,18 @@ Route::prefix('category')->name('category')->group(function () {
   Route::get('{id}', [CategoryController::class, 'singleAction'])->name('.single');
 });
 
+Route::prefix('post')->name('post')->group(function () {
+  Route::prefix('text')->name('.text')->group(function () {
+    Route::get('/', [TextController::class, 'listAction'])->name('.list');
+    Route::get('{id}', [TextController::class, 'singleAction'])->name('.single');
+  });
+
+  Route::prefix('video')->name('.video')->group(function () {
+    Route::get('/', [VideoController::class, 'listAction'])->name('.list');
+    Route::get('{id}', [VideoController::class, 'singleAction'])->name('.single');
+  });
+});
+
 Route::prefix('admin')->name('admin')->middleware('auth')->group(function () {
   Route::get('/', function () {
     return view('blog.adminPanel');
@@ -54,12 +68,21 @@ Route::prefix('admin')->name('admin')->middleware('auth')->group(function () {
 
   Route::prefix('post')->name('.post')->group(function () {
     Route::prefix('text')->name('.text')->group(function () {
-      Route::get('/', [CategoryController::class, 'listAction'])->name('.list');
-      Route::get('create', [CategoryController::class, 'createAction'])->name('.create');
-      Route::post('create', [CategoryController::class, 'storeAction'])->name('.store');
-      Route::get('{id}', [CategoryController::class, 'editAction'])->name('.edit');
-      Route::put('{id}', [CategoryController::class, 'updateAction'])->name('.update');
-      Route::delete('{id}', [CategoryController::class, 'deleteAction'])->name('.delete');
+      Route::get('/', [TextController::class, 'listAction'])->name('.list');
+      Route::get('create', [TextController::class, 'createAction'])->name('.create');
+      Route::post('create', [TextController::class, 'storeAction'])->name('.store');
+      Route::get('{id}', [TextController::class, 'editAction'])->name('.edit');
+      Route::put('{id}', [TextController::class, 'updateAction'])->name('.update');
+      Route::delete('{id}', [TextController::class, 'deleteAction'])->name('.delete');
+    });
+
+    Route::prefix('video')->name('.video')->group(function () {
+      Route::get('/', [VideoController::class, 'listAction'])->name('.list');
+      Route::get('create', [VideoController::class, 'createAction'])->name('.create');
+      Route::post('create', [VideoController::class, 'storeAction'])->name('.store');
+      Route::get('{id}', [VideoController::class, 'editAction'])->name('.edit');
+      Route::put('{id}', [VideoController::class, 'updateAction'])->name('.update');
+      Route::delete('{id}', [VideoController::class, 'deleteAction'])->name('.delete');
     });
   });
 });

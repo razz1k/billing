@@ -3,11 +3,11 @@
 @include('components.head')
 <body>
 <div id="app">
-    @include('components.header')
+  @include('components.header')
 
-    @include('components.main')
+  @include('components.main')
 
-    @include('components.footer')
+  @include('components.footer')
 </div>
 </body>
 </html>

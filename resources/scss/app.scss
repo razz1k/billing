@@ -10,43 +10,47 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .dark-theme {
-    background-color: var(--BrightGray);
+  background-color: var(--BrightGray);
+  color: var(--bs-white);
+
+  a {
     color: var(--bs-white);
+  }
 
-    .card {
-        background-color: var(--BrightGray);
-        border: 1px solid rgba(110, 170, 120, 0.25);
+  .card {
+    background-color: var(--BrightGray);
+    border: 1px solid rgba(110, 170, 120, 0.25);
 
-        .card-header {
-            border-bottom: 1px solid rgba(110, 170, 120, 0.25);
-        }
+    .card-header {
+      border-bottom: 1px solid rgba(110, 170, 120, 0.25);
     }
+  }
 
-    .modal-content {
-        background-color: var(--BrightGray);
-    }
+  .modal-content {
+    background-color: var(--BrightGray);
+  }
 }
 
 footer {
-    z-index: 2000;
+  z-index: 2000;
 }
 
 .post {
-    &__place-holder {
-        margin: auto;
-        display: flex;
-        text-align: center;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        height: 50px;
-    }
+  &__place-holder {
+    margin: auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: 50px;
+  }
 }
 
 .form {
-    &__input-icon {
-        &--small {
-            height: 15px;
-        }
+  &__input-icon {
+    &--small {
+      height: 15px;
     }
+  }
 }
