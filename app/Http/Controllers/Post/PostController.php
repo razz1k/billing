@@ -48,16 +48,18 @@ abstract class PostController extends Controller
   //storeAction implement in child class
 
   public function editAction($id) {
-    return view('blog.post.text.update', [
-      'post' => $this->postRepository->getSingle($id)
+    return view($this->viewUpdate, [
+      'post' => $this->postRepository->getSingle($id),
+      'categories' => Category::all(),
     ]);
   }
 
   public function singleAction($id) {
     $post = $this->postRepository->getSingle($id);
+
     return view($this->viewSingle, [
       'post' => $post,
-      'author' => User::get()->where('id', $post->author_id)->first()
+      'author' => User::get()->where('id', $post->author_id)->first(),
     ]);
   }
 
@@ -68,11 +70,11 @@ abstract class PostController extends Controller
     ]);
   }
 
-  //storeAction implement in child class
+  //updateAction implement in child class
 
   public function deleteAction($id) {
     $this->postRepository->delete($id);
 
-    return redirect(route('admin.category.list'));
+    return redirect(route($this->routeList));
   }
 }

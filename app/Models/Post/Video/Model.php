@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Post\Video;
 
-class VideoPost extends Post
+use App\Models\Post\PostModel;
+
+class Model extends PostModel
 {
   public function __construct(array $attributes = []) {
     parent::__construct($attributes);

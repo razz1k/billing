@@ -4,10 +4,33 @@
   <div class="container">
     <form class="needs-validation row justify-content-center"
           method="POST"
-          action="{{ route('admin.post.text.store', ['id' => $post->id]) }}">
+          action="{{ route('admin.post.text.update', ['id' => $post->id]) }}">
       @method('PUT')
       @csrf
       <div class="col-md-8">
+        <div class="input-group my-3">
+          <span class="input-group-text" for="input-group-text__author">
+              author
+          </span>
+          <input name="author_id"
+                 type="text"
+                 class="form-control"
+                 readonly
+                 value="{{ $post->author_id }}"
+                 aria-describedby="input-group-text__author">
+        </div>
+
+        <div class="input-group my-3">
+        <span class="input-group-text" for="input-group-text__category">
+            category
+        </span>
+          <select name="category_id" class="form-select" id="input-group-text__category" aria-label="select author">
+            @foreach($categories as $key => $category)
+              <option value="{{ $category->id }}" @if($key == 0) selected @endif> {{ $category->name }} </option>
+            @endforeach
+          </select>
+        </div>
+
         <div class="input-group my-3">
           <span class="input-group-text" id="input-group-text__metaTitle">
               metaTitle
@@ -159,6 +182,7 @@
       </div>
     </form>
   </div>
+
   <div class="modal fade" id="removeModal"
        tabindex="-1"
        aria-labelledby="deleteModalLabel"
@@ -186,5 +210,4 @@
       </div>
     </div>
   </div>
-
 @endsection

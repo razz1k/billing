@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Post\Text;
 
-use App\Models\TextPost;
+use App\Models\Post\Text\Model as TextModel;
 use App\Repositories\Post\PostRepository as AbstractPostRepository;
 
-class PostRepository extends AbstractPostRepository
+class Repository extends AbstractPostRepository
 {
-  public function __construct(TextPost $model) {
+  public function __construct(TextModel $model) {
     parent::__construct($model);
   }
 }

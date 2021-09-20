@@ -4,7 +4,7 @@
   <div class="container">
     <form class="needs-validation row justify-content-center"
           method="POST"
-          action="{{ route('admin.post.text.store') }}">
+          action="{{ route('admin.post.video.store') }}">
       @csrf
       <div class="col-md-8">
         <div class="input-group my-3">
@@ -38,7 +38,7 @@
                  type="text"
                  class="form-control @error('metaTitle') is-invalid @enderror"
                  placeholder="metaTitle"
-                 value="{{ old('') ?? '' }}"
+                 value="{{ old('metaTitle') ?? '' }}"
                  aria-describedby="input-group-text__metaTitle">
           @error('metaTitle')
           <span class="invalid-feedback" role="alert">
@@ -132,22 +132,23 @@
           @enderror
         </div>
 
-        <div class="my-3">
-          <span class="mx-3 form-label" for="input-group-text__content">
-              content
+        <div class="input-group my-3">
+          <span class="input-group-text" for="input-group-text__videoYoutube">
+            URL to video on Youtube
           </span>
-          <textarea name="content"
-                    id="input-group-text__content"
-                    class="form-control @error('content') is-invalid @enderror"
-                    cols="30"
-                    rows="10"
-                    placeholder="content">{{ old('content') ?? '' }}</textarea>
-          @error('content')
+          <input name="videoYoutube"
+                 type="text"
+                 class="form-control @error('videoYoutube') is-invalid @enderror"
+                 id="input-group-text__videoYoutube"
+                 placeholder="URL"
+                 value="{{ old('videoYoutube') ?? '' }}">
+          @error('videoYoutube')
           <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
           </span>
           @enderror
         </div>
+
 
         <div class="input-group my-3">
           <span class="input-group-text" id="input-group-text__after">

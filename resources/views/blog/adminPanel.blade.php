@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-6 d-grid gy-3">
-        <a href="#" class="btn btn-primary">Edit <span class="text-dark">Video</span>
+        <a href="{{ route('admin.post.video.list') }}" class="btn btn-primary">Edit <span class="text-dark">Video</span>
           Posts</a>
       </div>
     </div>

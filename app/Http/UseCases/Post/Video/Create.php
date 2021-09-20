@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\UseCases\Post\Text;
+namespace App\Http\UseCases\Post\Video;
 
-use App\Repositories\Post\Text\Repository;
-use App\Models\Post\Text\Model as TextModel;
+use App\Repositories\Post\Video\Repository;
+use App\Models\Post\Video\Model as VideoModel;
 use App\Http\UseCases\Post\UseCase as PostUseCase;
-use App\Http\Requests\Post\Text\CreateRequest;
+use App\Http\Requests\Post\Video\CreateRequest;
 
 class Create extends PostUseCase
 {
-  public function __construct(Repository $PostRepository, TextModel $model) {
+  public function __construct(Repository $PostRepository, VideoModel $model) {
     parent::__construct($PostRepository, $model);
   }
 

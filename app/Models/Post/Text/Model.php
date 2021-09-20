@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Post\Text;
 
-class TextPost extends Post
+use App\Models\Post\PostModel;
+
+class Model extends PostModel
 {
   public function __construct(array $attributes = []) {
     $this->mergeFillable(['content']);
-    
+
     parent::__construct($attributes);
   }
 

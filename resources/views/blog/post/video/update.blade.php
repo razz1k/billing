@@ -4,7 +4,8 @@
   <div class="container">
     <form class="needs-validation row justify-content-center"
           method="POST"
-          action="{{ route('admin.post.text.store') }}">
+          action="{{ route('admin.post.video.update', ['id' => $post->id]) }}">
+      @method('PUT')
       @csrf
       <div class="col-md-8">
         <div class="input-group my-3">
@@ -15,7 +16,7 @@
                  type="text"
                  class="form-control"
                  readonly
-                 value="{{ $user->id }}"
+                 value="{{ $post->author_id }}"
                  aria-describedby="input-group-text__author">
         </div>
 
@@ -38,7 +39,7 @@
                  type="text"
                  class="form-control @error('metaTitle') is-invalid @enderror"
                  placeholder="metaTitle"
-                 value="{{ old('') ?? '' }}"
+                 value="{{ $post->metaTitle ?? '' }}"
                  aria-describedby="input-group-text__metaTitle">
           @error('metaTitle')
           <span class="invalid-feedback" role="alert">
@@ -55,7 +56,7 @@
                  type="text"
                  class="form-control @error('metaDescription') is-invalid @enderror"
                  placeholder="metaDescription"
-                 value="{{ old('metaDescription') ?? '' }}"
+                 value="{{ $post->metaDescription ?? '' }}"
                  aria-describedby="input-group-text__metaDescription">
           @error('metaDescription')
           <span class="invalid-feedback" role="alert">
@@ -72,7 +73,7 @@
                  type="text"
                  class="form-control @error('metaKeywords') is-invalid @enderror"
                  placeholder="metaKeywords"
-                 value="{{ old('metaKeywords') ?? '' }}"
+                 value="{{ $post->metaKeywords ?? '' }}"
                  aria-describedby="input-group-text__metaKeywords">
           @error('metaKeywords')
           <span class="invalid-feedback" role="alert">
@@ -89,7 +90,7 @@
                  type="text"
                  class="form-control @error('preview') is-invalid @enderror"
                  placeholder="preview"
-                 value="{{ old('preview') ?? '' }}"
+                 value="{{ $post->preview ?? '' }}"
                  aria-describedby="input-group-text__preview">
           @error('preview')
           <span class="invalid-feedback" role="alert">
@@ -106,7 +107,7 @@
                  type="text"
                  class="form-control @error('title') is-invalid @enderror"
                  placeholder="title"
-                 value="{{ old('title') ?? '' }}"
+                 value="{{ $post->title ?? '' }}"
                  aria-describedby="input-group-text__title">
           @error('title')
           <span class="invalid-feedback" role="alert">
@@ -123,7 +124,7 @@
                  type="text"
                  class="form-control @error('description') is-invalid @enderror"
                  placeholder="description"
-                 value="{{ old('description') ?? '' }}"
+                 value="{{ $post->description ?? '' }}"
                  aria-describedby="input-group-text__description">
           @error('description')
           <span class="invalid-feedback" role="alert">
@@ -132,22 +133,23 @@
           @enderror
         </div>
 
-        <div class="my-3">
-          <span class="mx-3 form-label" for="input-group-text__content">
-              content
+        <div class="input-group my-3">
+          <span class="input-group-text" for="input-group-text__videoYoutube">
+            URL to video on Youtube
           </span>
-          <textarea name="content"
-                    id="input-group-text__content"
-                    class="form-control @error('content') is-invalid @enderror"
-                    cols="30"
-                    rows="10"
-                    placeholder="content">{{ old('content') ?? '' }}</textarea>
-          @error('content')
+          <input name="videoYoutube"
+                 type="text"
+                 class="form-control @error('videoYoutube') is-invalid @enderror"
+                 id="input-group-text__videoYoutube"
+                 placeholder="URL"
+                 value="{{ $post->videoYoutube ?? '' }}">
+          @error('videoYoutube')
           <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+            <strong>{{ $message }}</strong>
           </span>
           @enderror
         </div>
+
 
         <div class="input-group my-3">
           <span class="input-group-text" id="input-group-text__after">
@@ -157,7 +159,7 @@
                  type="text"
                  class="form-control @error('after') is-invalid @enderror"
                  placeholder="after"
-                 value="{{ old('after') ?? '' }}"
+                 value="{{ $post->after ?? '' }}"
                  aria-describedby="input-group-text__after">
           @error('after')
           <span class="invalid-feedback" role="alert">
@@ -167,8 +169,47 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary float-end">Create new</button>
+        <div class="btn-group d-flex float-end"
+             role="group"
+             aria-label="events for category">
+          <button type="submit" class="btn btn-primary float-end">
+            Save
+          </button>
+          <button type="button" class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#removeModal">
+            Delete
+          </button>
+        </div>
       </div>
     </form>
+  </div>
+
+  <div class="modal fade" id="removeModal"
+       tabindex="-1"
+       aria-labelledby="deleteModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Are you shure about this?</h5>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>You want delete <strong>{{ $post->title }}</strong> post</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form method="POST" action="{{ route('admin.post.video.delete', ['id' => $post->id]) }}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn btn-danger">I'am shure, delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection
